@@ -164,22 +164,29 @@ function App() {
   const handleInputChange = (e) => {
     let value = e.target.value;
 
+    // Mobile Space Handling: If space is the last char, submit word
+    if (value.endsWith(' ')) {
+      // Remove the space
+      const pendingValue = value.slice(0, -1);
+
+      // Update input with the value before space
+      setInputValue(pendingValue);
+
+      // Since state update is async, we need to manually trigger submit logic with current values
+      setTimeout(() => {
+        handleWordSubmit(pendingValue); // Pass the value directly to ensure sync
+      }, 0);
+      return;
+    }
+
     // Mobile Fallback: Handle Tamil conversion if KeyDown didn't catch it
     if (language === 'tamil' && value.length > inputValue.length) {
       const lastChar = value.slice(-1);
-      // Check if the last character is English/ASCII and needs conversion
-      // (This handles cases where preventDefault() in invalid for mobile keyboards)
       if (/^[a-zA-Z0-9`\-=\[\]\\;',./~!@#$%^&*()_+{}|:"<>?]*$/.test(lastChar)) {
         const isShifted = lastChar !== lastChar.toLowerCase() ||
           ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'].includes(lastChar);
 
-        // We need to map shifted symbols back to their unshifted keys for lookup if possible, 
-        // OR just rely on our convert function if it handles the char directly?
-        // Our convertToTamil mainly handles keys. 
-        // Let's try to convert:
         const converted = convertToTamil(lastChar, isShifted);
-
-        // If conversion happened and it's different (and valid Tamil or mapped symbol)
         if (converted !== lastChar) {
           value = value.slice(0, -1) + converted;
         }
@@ -188,11 +195,25 @@ function App() {
 
     setInputValue(value);
 
-    // Check if input matches current word
-    if (value.length > 0 && currentWordIndex < wordList.length) {
+    // Auto-Submit Logic
+    if (currentWordIndex < wordList.length) {
       const currentWord = wordList[currentWordIndex];
-      const isMatching = currentWord.startsWith(value.normalize('NFC'));
-      setInputStatus(isMatching ? 'correct' : 'wrong');
+      const normalizedValue = value.normalize('NFC');
+      const normalizedWord = currentWord.normalize('NFC');
+
+      // Check if correct
+      if (normalizedWord.startsWith(normalizedValue)) {
+        setInputStatus('correct');
+
+        // If fully matches correct word, submit immediately
+        if (normalizedValue === normalizedWord) {
+          // We need to use valid-check here
+          handleWordSubmit(value);
+          return;
+        }
+      } else {
+        setInputStatus('wrong');
+      }
     } else {
       setInputStatus('');
     }
@@ -249,19 +270,25 @@ function App() {
     e.preventDefault();
   };
 
-  const handleWordSubmit = () => {
-    if (!inputValue.trim() || currentWordIndex >= wordList.length) return;
+  const handleWordSubmit = (overrideValue = null) => {
+    const valueToCheck = overrideValue !== null ? overrideValue : inputValue;
+
+    // Safety check - empty or out of bounds
+    if ((!valueToCheck && valueToCheck !== '') || currentWordIndex >= wordList.length) return;
+
+    // Don't submit empty strings unless it's a forced skip (future feature?)
+    if (!valueToCheck.trim()) return;
 
     const currentWord = wordList[currentWordIndex];
-    const isCorrect = compareWords(inputValue, currentWord);
+    const isCorrect = compareWords(valueToCheck, currentWord);
 
     // Update metrics
     if (isCorrect) {
       setCorrectWords((prev) => prev + 1);
-      setCorrectKeystrokes((prev) => prev + inputValue.length);
+      setCorrectKeystrokes((prev) => prev + valueToCheck.length);
     } else {
       setWrongWords((prev) => prev + 1);
-      setWrongKeystrokes((prev) => prev + inputValue.length);
+      setWrongKeystrokes((prev) => prev + valueToCheck.length);
     }
 
     // Update word status
