@@ -1,49 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ZenType - Premium typing practice for English and Tamil (Marutham layout). Perfect for Tamil government exam preparation.">
-    <meta name="keywords" content="Tamil typing, Marutham keyboard, typing practice, Tamil government exam, typing speed test">
-    <title>ZenType - Premium Typing Practice</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS - Load early -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // Configure Tailwind to watch for dynamic content
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {}
-        }
-      }
-    </script>
-    
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- React & Babel -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml"
+    href="https://raw.githubusercontent.com/itslokeshx/itslokeshx/refs/heads/main/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenType</title>
 </head>
+
 <body>
-    <div id="root"></div>
-    <script type="text/babel">
-      // Force Tailwind to rescan after React renders
-      if (window.tailwind) {
-        setTimeout(() => {
-          if (window.tailwind && window.tailwind.refresh) {
-            window.tailwind.refresh();
-          }
-        }, 100);
-      }
-    </script>
-    <script type="text/babel" src="app.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
+
 </html>

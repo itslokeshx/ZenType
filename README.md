@@ -1,160 +1,180 @@
-# ZenType ⚡
+# ZenType - Premium Typing Practice Platform
 
-A beautiful, modern typing practice application supporting both English and Tamil (Marutham keyboard layout). Perfect for improving typing speed and accuracy with a clean, distraction-free interface.
+A world-class, exam-grade typing practice application focused on **Tamil (Marutham layout)** and **English (QWERTY)**. Designed for government exam preparation with zero tolerance for Tamil Unicode handling errors.
 
-![ZenType](https://img.shields.io/badge/version-1.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+![ZenType](https://img.shields.io/badge/React-19-blue) ![Vite](https://img.shields.io/badge/Vite-7-purple) ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## ✨ Features
 
-- 🌐 **Dual Language Support**: Practice typing in English or Tamil (Marutham layout)
-- ⏱️ **Flexible Timer**: Choose from 15s, 30s, 60s, or set a custom duration
-- 🎨 **Dark/Light Theme**: Comfortable typing experience in any lighting
-- 📊 **Real-time Statistics**: Track WPM, accuracy, correct/wrong words, and keystrokes
-- 🎯 **Live Feedback**: Instant visual feedback on typing accuracy
-- 📱 **Responsive Design**: Works seamlessly on desktop and mobile devices
-- ✨ **Glassmorphism UI**: Modern, elegant design with smooth animations
+- 🌐 **Dual Language Support**: Tamil (Marutham layout) and English (QWERTY)
+- ⌨️ **Built-in Marutham Layout**: No OS keyboard switch needed! Type Tamil using your English keyboard
+- 🎨 **Beautiful Themes**: Light and dark mode with smooth transitions
+- ⏱️ **Flexible Timer**: Set custom minutes and seconds for practice sessions
+- 📊 **Detailed Metrics**: WPM, accuracy, keystrokes breakdown, and word counts
+- 🎯 **Exam-Focused**: 100+ government exam-relevant Tamil words
+- 🔤 **Unicode Perfect**: NFC normalization for accurate Tamil character comparison
+- 📱 **Fully Responsive**: Works seamlessly on desktop, tablet, and mobile
+- 💾 **Persistent Settings**: Remembers your theme, language, and timer preferences
 
 ## 🚀 Quick Start
 
-### Option 1: Visit the Live Site
-Simply visit the hosted version at: `https://YOUR-USERNAME.github.io/ZenType`
+### Installation
 
-### Option 2: Run Locally
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR-USERNAME/ZenType.git
-cd ZenType
+# Clone the repository
+git clone https://github.com/yourusername/zentype.git
+cd zentype
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-2. Start a local server:
+The app will be available at `http://localhost:5173`
+
+### Build for Production
+
 ```bash
-# Using Python 3
-python3 -m http.server 8080
-
-# Or using Python 2
-python -m SimpleHTTPServer 8080
-
-# Or using Node.js
-npx serve
+npm run build
 ```
 
-3. Open your browser and navigate to `http://localhost:8080`
+## ⌨️ How Tamil Input Works
 
-## 🎮 How to Use
+**No OS keyboard configuration needed!** 
 
-1. **Select Language**: Choose between English or தமிழ் (Tamil)
-2. **Set Timer**: Pick a duration or enter a custom time (1-600 seconds)
-3. **Start Typing**: Click on the typing area and start typing the displayed words
-4. **Track Progress**: Monitor your WPM, accuracy, and other stats in real-time
-5. **View Results**: When time's up, see your detailed performance metrics
+When you switch to Tamil mode, the app automatically uses the **Marutham keyboard layout**. Simply type using your regular English keyboard, and it will be converted to Tamil characters in real-time.
 
-## 🎯 Tamil Marutham Keyboard Layout
+For example:
+- Press `a` → அ
+- Press `h` → ய
+- Press `k` → ல
+- Press `m` → ம
 
-The application uses the standard Marutham keyboard layout for Tamil typing. Simply type using your English keyboard, and it will automatically convert to Tamil characters.
+The complete Marutham layout mapping is built into the application!
 
-**Example mappings:**
-- Press `a` → யு
-- Press `s` → ளு  
-- Press `Shift + a` → யூ
-- Press `space` or `enter` to complete a word
 
-## 🛠️ Technologies Used
+## 📖 How to Use
 
-- **React 18** - UI framework
-- **Tailwind CSS** - Styling via CDN
-- **Babel Standalone** - JSX transformation
-- **Mukta Malar Font** - Tamil typography
-- **Inter Font** - English typography
+1. **Select Language**: Click EN or தமிழ் to switch between English and Tamil
+2. **Set Timer**: Enter minutes and seconds (default: 1:00)
+3. **Start Typing**: Click Start or just begin typing to auto-start
+4. **Type Words**: Type the highlighted word and press Space or Enter
+5. **View Results**: Timer ends automatically or click Stop to see your performance
 
-## 📁 Project Structure
+## 🎯 Metrics Explained
+
+- **WPM (Words Per Minute)**: `(Correct Keystrokes / 5) / Time in Minutes`
+- **Accuracy**: `(Correct Keystrokes / Total Keystrokes) × 100`
+- **Keystrokes**: Shows correct (green) and wrong (red) keystroke counts
+- **Word Counts**: Number of correctly and incorrectly typed words
+
+## 🛠️ Technology Stack
+
+- **Framework**: React 19
+- **Build Tool**: Vite 7
+- **Styling**: Pure CSS with CSS Variables
+- **State Management**: React Hooks
+- **Storage**: localStorage
+- **Fonts**: 
+  - English: Inter, SF Pro Display
+  - Tamil: Noto Serif Tamil, Latha
+
+## 🎨 Design Philosophy
+
+- **Apple-grade minimalism**: Clean, spacious, no visual noise
+- **Exam-room feel**: Serious, focused, professional
+- **Zero distractions**: No animations except essential feedback
+- **Accessibility**: High contrast ratios, clear focus states
+- **Performance**: 60fps always, no jank
+
+## 📂 Project Structure
 
 ```
-ZenType/
-├── index.html          # Main HTML file
-├── app.js             # React application code
-├── styles.css         # Custom styles and animations
-└── README.md          # Documentation
+zentype/
+├── src/
+│   ├── App.jsx              # Main application component
+│   ├── App.css              # Complete styling with themes
+│   ├── main.jsx             # Entry point
+│   ├── index.css            # Global resets
+│   ├── data/
+│   │   ├── englishWords.js  # 100+ common English words
+│   │   └── tamilWords.js    # 100+ government exam Tamil words
+│   └── utils/
+│       ├── normalize.js     # Unicode normalization utilities
+│       └── maruthamLayout.js # Marutham keyboard layout mapping
+├── public/
+├── index.html
+├── package.json
+└── vite.config.js
 ```
 
-## 🌐 Deploy to GitHub Pages
+## 🔧 Configuration
 
-1. **Initialize Git** (if not already done):
-```bash
-git init
-git add .
-git commit -m "Initial commit"
+### Customizing Word Lists
+
+Edit `src/data/englishWords.js` or `src/data/tamilWords.js` to add your own words:
+
+```javascript
+export const tamilWords = [
+  'தமிழ்', 'அரசு', 'தேர்வு',
+  // Add your words here
+];
 ```
 
-2. **Create a GitHub repository**:
-   - Go to [GitHub](https://github.com) and create a new repository named `ZenType`
-   - Don't initialize with README (we already have one)
+### Changing Theme Colors
 
-3. **Push to GitHub**:
-```bash
-git remote add origin https://github.com/YOUR-USERNAME/ZenType.git
-git branch -M main
-git push -u origin main
-```
+Edit CSS variables in `src/App.css`:
 
-4. **Enable GitHub Pages**:
-   - Go to your repository on GitHub
-   - Click **Settings** → **Pages**
-   - Under "Source", select **main** branch
-   - Click **Save**
-   - Your site will be live at `https://YOUR-USERNAME.github.io/ZenType`
-
-## 🎨 Customization
-
-### Changing Colors
-Edit the CSS variables in `styles.css`:
 ```css
-:root {
-  --accent-light: #3B82F6;  /* Primary color */
-  --success-light: #10B981; /* Success color */
-  --error-light: #EF4444;   /* Error color */
+:root[data-theme="light"] {
+  --bg-primary: #FAFAFA;
+  --accent-blue: #3B82F6;
+  /* Customize colors */
 }
 ```
 
-### Adding More Words
-Edit the word pools in `app.js`:
-```javascript
-const ENGLISH_WORDS = [...];
-const TAMIL_WORDS = [...];
-```
+## 🧪 Testing Tamil Input
 
-### Adjusting Timer Durations
-Modify the duration options in the ControlPanel component:
-```javascript
-{[15, 30, 60].map((duration) => ( /* ... */ ))}
-```
+Test these Tamil character combinations to verify Unicode handling:
+
+- **Vowel signs**: கா, கி, கீ, கு, கூ, கெ, கே, கை, கொ, கோ, கௌ
+- **Pulli**: க், த், ன், ம்
+- **Compound letters**: க்ஷ, ஶ்ரீ
+- **Long words**: அமைச்சகம், விண்ணப்பம், சான்றிதழ்
+
+## 🚫 What's NOT Included (By Design)
+
+- ❌ Virtual keyboard display
+- ❌ Auto-correction
+- ❌ Suggestions/autocomplete
+- ❌ Paste functionality
+- ❌ Backspace to previous word
+- ❌ Animated backgrounds
+- ❌ Sound effects
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to:
-- Report bugs
-- Suggest new features
-- Submit pull requests
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is licensed under the MIT License - feel free to use it for personal or commercial projects.
+MIT License - feel free to use this project for personal or commercial purposes.
 
-## 💖 Acknowledgments
+## 🙏 Acknowledgments
 
-- Designed for Tamil learners and government exam preparation
-- Marutham keyboard layout support for authentic Tamil typing
-- Inspired by popular typing practice tools like MonkeyType
+- Tamil word list curated for government exam preparation
+- Inspired by professional typing test platforms
+- Built with ❤️ for Tamil language learners
 
-## 🐛 Known Issues
+## 📞 Support
 
-None currently! Report issues on the [GitHub Issues](https://github.com/YOUR-USERNAME/ZenType/issues) page.
-
-## 📬 Contact
-
-Created with ♥ for Tamil learners
+If you encounter any issues or have questions:
+- Open an issue on GitHub
+- Check the Tamil keyboard setup guide above
+- Ensure your browser supports Tamil Unicode (all modern browsers do)
 
 ---
 
-⭐ Star this repository if you found it helpful!
+**Made with 🔥 for Tamil typing excellence**
