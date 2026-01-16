@@ -589,11 +589,11 @@
 @media (max-width: 767px) {
   .header {
     padding: 0 16px;
-    height: 56px;
+    height: 50px;
   }
 
   .logo {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .header-controls {
@@ -601,73 +601,151 @@
   }
 
   .language-btn {
-    padding: 6px 12px;
-    font-size: 13px;
+    padding: 6px 10px;
+    font-size: 12px;
   }
 
   .theme-toggle {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
   }
 
   .main-content {
-    padding: 20px 16px;
+    padding: 12px;
+    align-items: flex-start;
   }
 
   .typing-container {
-    gap: 16px;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Timer & Stats on Top (Horizontal Bar) */
+  .timer-stats-section {
+    order: -1;
+    padding: 12px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .timer-display {
+    padding: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .timer-label {
+    margin: 0;
+    display: none;
+    /* Hide label to save space */
+  }
+
+  .timer-time-display {
+    font-size: 24px;
+  }
+
+  .timer-inputs {
+    gap: 4px;
+  }
+
+  .timer-input {
+    width: 36px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .timer-separator {
+    font-size: 16px;
+  }
+
+  .timer-buttons {
+    flex-direction: row;
+  }
+
+  .btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .stats-grid {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .stat-item {
+    padding: 4px 8px;
+    min-width: 60px;
+  }
+
+  .stat-label {
+    font-size: 8px;
+  }
+
+  .stat-value {
+    font-size: 14px;
+  }
+
+  /* Words & Input */
+  .words-input-section {
+    gap: 12px;
   }
 
   .word-display-container {
-    padding: 16px;
+    padding: 12px;
+    /* Show roughly 2 lines compact */
+    min-height: 80px;
+    max-height: 80px;
+  }
+
+  .word-display-container[data-lang="tamil"] {
     min-height: 100px;
     max-height: 100px;
   }
 
   .word-display {
-    font-size: 20px;
+    font-size: 18px;
     gap: 8px;
   }
 
   .word-display[data-lang="tamil"] {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .input-box {
-    font-size: 18px;
-    height: 60px;
-    padding: 16px;
+    font-size: 16px;
+    height: 50px;
+    padding: 12px;
   }
 
   .input-box[data-lang="tamil"] {
-    font-size: 22px;
+    font-size: 18px;
   }
 
-  .timer-stats-section {
-    padding: 20px;
-  }
-
-  .timer-time-display {
-    font-size: 36px;
-  }
-
+  /* Modal Adjustments */
   .modal {
-    padding: 24px;
+    padding: 20px;
+    width: 95%;
   }
 
-  .modal-title {
-    font-size: 24px;
+  .inline-results {
+    padding: 16px;
   }
 
-  .result-value.highlight {
-    font-size: 28px;
-  }
-
-  .modal-actions {
-    flex-direction: column;
+  .results-summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 }
+
 
 /* ===========================
    Accessibility

@@ -162,7 +162,30 @@ function App() {
   };
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
+    let value = e.target.value;
+
+    // Mobile Fallback: Handle Tamil conversion if KeyDown didn't catch it
+    if (language === 'tamil' && value.length > inputValue.length) {
+      const lastChar = value.slice(-1);
+      // Check if the last character is English/ASCII and needs conversion
+      // (This handles cases where preventDefault() in invalid for mobile keyboards)
+      if (/^[a-zA-Z0-9`\-=\[\]\\;',./~!@#$%^&*()_+{}|:"<>?]*$/.test(lastChar)) {
+        const isShifted = lastChar !== lastChar.toLowerCase() ||
+          ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', '|', ':', '"', '<', '>', '?'].includes(lastChar);
+
+        // We need to map shifted symbols back to their unshifted keys for lookup if possible, 
+        // OR just rely on our convert function if it handles the char directly?
+        // Our convertToTamil mainly handles keys. 
+        // Let's try to convert:
+        const converted = convertToTamil(lastChar, isShifted);
+
+        // If conversion happened and it's different (and valid Tamil or mapped symbol)
+        if (converted !== lastChar) {
+          value = value.slice(0, -1) + converted;
+        }
+      }
+    }
+
     setInputValue(value);
 
     // Check if input matches current word
@@ -175,7 +198,7 @@ function App() {
     }
 
     // Start timer on first keystroke
-    if (!hasStarted && value.length === 1) {
+    if (!hasStarted && value.length > 0) {
       handleStart();
     }
   };
@@ -333,6 +356,7 @@ function App() {
               <input
                 ref={inputRef}
                 type="text"
+                inputMode="text"
                 className={`input-box ${inputStatus}`}
                 data-lang={language}
                 value={inputValue}
