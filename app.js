@@ -176,7 +176,7 @@ const Header = () => {
             </div>
             <div>
               <h1 className={`text-xl font-bold ${theme === 'dark' ? 'text-gray-100' : 'text-gray-900'}`}>
-                ZenType Tamil
+                ZenType
               </h1>
               <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                 Premium Typing Practice
@@ -838,7 +838,7 @@ const Footer = () => {
   return (
     <footer className={`py-6 text-center ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
       <p className="text-sm">
-        © 2025 ZenType Tamil • v1.0 • Made with ♥ for Tamil learners
+        © 2025 ZenType • v1.0 • Made with ♥ for Tamil learners
       </p>
     </footer>
   );
