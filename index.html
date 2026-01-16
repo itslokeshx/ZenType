@@ -12,6 +12,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Mukta+Malar:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS - Load early -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Configure Tailwind to watch for dynamic content
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {}
+        }
+      }
+    </script>
+    
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
     
@@ -19,12 +31,19 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Tailwind CSS - Load AFTER React so it can see the rendered content -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
 </head>
 <body>
     <div id="root"></div>
+    <script type="text/babel">
+      // Force Tailwind to rescan after React renders
+      if (window.tailwind) {
+        setTimeout(() => {
+          if (window.tailwind && window.tailwind.refresh) {
+            window.tailwind.refresh();
+          }
+        }, 100);
+      }
+    </script>
     <script type="text/babel" src="app.js"></script>
 </body>
 </html>
