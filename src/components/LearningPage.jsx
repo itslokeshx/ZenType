@@ -207,10 +207,8 @@ function LearningPage({ language, theme, onBackToPractice }) {
     };
 
     const canAccessExercise = (exerciseId) => {
-        if (exerciseId === 1) return true;
-        const prevExerciseId = exerciseId - 1;
-        const prevScore = progress[language].exerciseScores[prevExerciseId];
-        return prevScore && prevScore.completed;
+        // All exercises are now unlocked
+        return true;
     };
 
     const getExerciseStatus = (exerciseId) => {

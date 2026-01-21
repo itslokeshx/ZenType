@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-// Finger color mapping
+// Finger color mapping - More vibrant colors
 const FINGER_COLORS = {
-    'left-pinky': '#ffcdd2',      // Light red
-    'left-ring': '#ffe0b2',       // Light orange
-    'left-middle': '#fff9c4',     // Light yellow
-    'left-index': '#c8e6c9',      // Light green
-    'right-index': '#bbdefb',     // Light blue
-    'right-middle': '#e1bee7',    // Light purple
-    'right-ring': '#f8bbd0',      // Light pink
-    'right-pinky': '#e0e0e0',     // Light gray
-    'thumb': '#d7ccc8'            // Light brown
+    'left-pinky': '#ef9a9a',      // Vibrant coral red
+    'left-ring': '#ffcc80',       // Warm orange
+    'left-middle': '#fff176',     // Bright yellow
+    'left-index': '#a5d6a7',      // Fresh green
+    'right-index': '#90caf9',     // Sky blue
+    'right-middle': '#ce93d8',    // Lavender purple
+    'right-ring': '#f48fb1',      // Rose pink
+    'right-pinky': '#b0bec5',     // Steel gray
+    'thumb': '#bcaaa4'            // Warm brown
 };
 
 // English QWERTY layout with finger assignments
