@@ -42,6 +42,7 @@ function LearningPage({ language, theme, onBackToPractice }) {
     const [showKeyboard, setShowKeyboard] = useState(true);
     const [exerciseComplete, setExerciseComplete] = useState(false);
 
+    const processingRef = useRef(false);
     const inputRef = useRef(null);
 
     const currentExercise = exercises.find(ex => ex.id === currentExerciseId);
@@ -52,8 +53,9 @@ function LearningPage({ language, theme, onBackToPractice }) {
         localStorage.setItem('learningProgress', JSON.stringify(progress));
     }, [progress]);
 
-    // Focus input on mount and exercise change
+    // Reset processing ref when exercise or line changes
     useEffect(() => {
+        processingRef.current = false;
         inputRef.current?.focus();
     }, [currentExerciseId, currentLineIndex]);
 
@@ -72,7 +74,38 @@ function LearningPage({ language, theme, onBackToPractice }) {
         setCharStatuses(statuses);
     }, [inputValue, currentLine]);
 
+    // Check for line completion - works for both English and Tamil
+    useEffect(() => {
+        if (processingRef.current) return;
+        if (!currentLine || inputValue.length !== currentLine.length) return;
+
+        processingRef.current = true;
+
+        // Count correct characters
+        let correct = 0;
+        for (let i = 0; i < inputValue.length; i++) {
+            if (inputValue[i] === currentLine[i]) correct++;
+        }
+
+        setCorrectChars(prev => prev + correct);
+        setTotalChars(prev => prev + currentLine.length);
+
+        // Move to next line after a short delay
+        setTimeout(() => {
+            if (currentLineIndex < currentExercise.targetLines.length - 1) {
+                setCurrentLineIndex(prev => prev + 1);
+                setInputValue('');
+            } else {
+                // Exercise complete
+                handleExerciseComplete();
+            }
+        }, 300);
+    }, [inputValue, currentLine]);
+
     const handleInputChange = (e) => {
+        // If already processing completion, ignore input
+        if (processingRef.current) return;
+
         let value = e.target.value;
 
         // Tamil conversion for mobile fallback
@@ -94,31 +127,6 @@ function LearningPage({ language, theme, onBackToPractice }) {
         }
 
         setInputValue(value);
-
-        // Check if line is complete
-        if (value.length === currentLine.length) {
-            const isCorrect = compareWords(value, currentLine);
-
-            // Count correct characters
-            let correct = 0;
-            for (let i = 0; i < value.length; i++) {
-                if (value[i] === currentLine[i]) correct++;
-            }
-
-            setCorrectChars(prev => prev + correct);
-            setTotalChars(prev => prev + currentLine.length);
-
-            // Move to next line after a short delay
-            setTimeout(() => {
-                if (currentLineIndex < currentExercise.targetLines.length - 1) {
-                    setCurrentLineIndex(prev => prev + 1);
-                    setInputValue('');
-                } else {
-                    // Exercise complete
-                    handleExerciseComplete();
-                }
-            }, 300);
-        }
     };
 
     const handleKeyDown = (e) => {
