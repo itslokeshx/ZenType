@@ -610,27 +610,62 @@
 /* Mobile: 320px - 767px */
 @media (max-width: 767px) {
   .header {
-    padding: 0 16px;
-    height: 50px;
+    padding: 0 12px;
+    height: auto;
+    min-height: 50px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .logo {
-    font-size: 18px;
+    font-size: 16px;
+    order: 1;
+  }
+
+  .header-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .nav-btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .nav-btn svg {
+    width: 16px;
+    height: 16px;
   }
 
   .header-controls {
-    gap: 8px;
+    order: 2;
+    gap: 6px;
+  }
+
+  .language-toggle {
+    border-radius: 6px;
   }
 
   .language-btn {
-    padding: 6px 10px;
-    font-size: 12px;
+    padding: 6px 8px;
+    font-size: 11px;
   }
 
   .theme-toggle {
     width: 32px;
     height: 32px;
     font-size: 16px;
+    border-radius: 6px;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
   }
 
   .main-content {
