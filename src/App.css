@@ -1379,4 +1379,147 @@
   .stat-value {
     font-size: 20px;
   }
+
+  .complete-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .complete-buttons .btn {
+    width: 100%;
+  }
+
+  .progress-stats {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  .exercise-controls {
+    width: 100%;
+  }
+
+  .exercise-controls .btn {
+    width: 100%;
+  }
+}
+
+/* Very small screens (< 480px) */
+@media (max-width: 479px) {
+  .learning-header {
+    padding: 10px 12px;
+  }
+
+  .learning-header .btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .learning-header .btn span {
+    display: none;
+  }
+
+  .learning-title {
+    font-size: 14px;
+    order: 2;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .exercise-menu {
+    max-height: 120px;
+    padding: 8px;
+  }
+
+  .menu-title {
+    display: none;
+  }
+
+  .exercise-item {
+    min-width: 100px;
+    padding: 6px 8px;
+  }
+
+  .exercise-number {
+    font-size: 12px;
+    min-width: 22px;
+    height: 22px;
+  }
+
+  .exercise-name {
+    font-size: 10px;
+  }
+
+  .exercise-area {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .exercise-title {
+    font-size: 16px;
+  }
+
+  .exercise-description {
+    display: none;
+  }
+
+  .target-text {
+    font-size: 20px;
+    padding: 12px;
+  }
+
+  .target-text[data-lang="tamil"] {
+    font-size: 24px;
+  }
+
+  .learning-input {
+    height: 50px;
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .learning-input[data-lang="tamil"] {
+    font-size: 20px;
+  }
+
+  .visual-keyboard {
+    padding: 8px;
+    gap: 3px;
+  }
+
+  .keyboard-row {
+    gap: 3px;
+  }
+
+  .keyboard-key {
+    min-width: 26px;
+    height: 28px;
+    font-size: 10px;
+    border-radius: 4px;
+  }
+
+  .keyboard-key.wide {
+    min-width: 60px;
+  }
+
+  .key-label {
+    font-size: 9px;
+  }
+
+  .complete-stat {
+    padding: 12px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .complete-message {
+    font-size: 12px;
+  }
 }
