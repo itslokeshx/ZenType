@@ -39,9 +39,20 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
+  // Fisher-Yates shuffle for truly random word order
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   // Words & Input
   const wordList = useMemo(() => {
-    return language === 'tamil' ? tamilWords : englishWords;
+    const words = language === 'tamil' ? tamilWords : englishWords;
+    return shuffleArray(words);
   }, [language]);
 
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
