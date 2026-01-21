@@ -4,8 +4,12 @@ import { englishWords } from './data/englishWords';
 import { tamilWords } from './data/tamilWords';
 import { compareWords, formatTime, calculateMetrics } from './utils/normalize';
 import { convertToTamil } from './utils/maruthamLayout';
+import LearningPage from './components/LearningPage';
 
 function App() {
+  // Page Navigation
+  const [currentPage, setCurrentPage] = useState('practice'); // 'practice' | 'learning'
+
   // Language & Theme
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem('preferredLanguage') || 'english';
@@ -329,19 +333,33 @@ function App() {
       {/* Header */}
       <header className="header">
         <div className="logo">ZenType</div>
+        <div className="header-nav">
+          <button
+            className={`nav-btn ${currentPage === 'practice' ? 'active' : ''}`}
+            onClick={() => setCurrentPage('practice')}
+          >
+            {language === 'tamil' ? 'பயிற்சி' : 'Practice'}
+          </button>
+          <button
+            className={`nav-btn ${currentPage === 'learning' ? 'active' : ''}`}
+            onClick={() => setCurrentPage('learning')}
+          >
+            {language === 'tamil' ? 'கற்றல்' : 'Learning'}
+          </button>
+        </div>
         <div className="header-controls">
           <div className="language-toggle">
             <button
               className={`language-btn ${language === 'english' ? 'active' : ''}`}
               onClick={() => handleLanguageSwitch('english')}
-              disabled={hasStarted}
+              disabled={hasStarted && currentPage === 'practice'}
             >
               EN
             </button>
             <button
               className={`language-btn ${language === 'tamil' ? 'active' : ''}`}
               onClick={() => handleLanguageSwitch('tamil')}
-              disabled={hasStarted}
+              disabled={hasStarted && currentPage === 'practice'}
             >
               தமிழ்
             </button>
@@ -353,157 +371,164 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="main-content">
-        <div className="typing-container">
-          {/* Left Side - Words & Input */}
-          <div className="words-input-section">
-            {/* Word Display - 2 Lines Max */}
-            <div className="word-display-container" data-lang={language}>
-              <div className="word-display" data-lang={language}>
-                {wordList.slice(currentWordIndex, currentWordIndex + 15).map((word, index) => {
-                  const globalIndex = currentWordIndex + index;
-                  const status = wordStatuses[globalIndex];
-                  if (status === 'correct' || status === 'wrong') {
-                    return null;
-                  }
-                  return (
-                    <span
-                      key={globalIndex}
-                      className={`word ${index === 0 ? 'active' : ''} ${status}`}
-                    >
-                      {word}
-                    </span>
-                  );
-                })}
+      {currentPage === 'learning' ? (
+        <LearningPage
+          language={language}
+          theme={theme}
+          onBackToPractice={() => setCurrentPage('practice')}
+        />
+      ) : (
+        <main className="main-content">
+          <div className="typing-container">
+            {/* Left Side - Words & Input */}
+            <div className="words-input-section">
+              {/* Word Display - 2 Lines Max */}
+              <div className="word-display-container" data-lang={language}>
+                <div className="word-display" data-lang={language}>
+                  {wordList.slice(currentWordIndex, currentWordIndex + 15).map((word, index) => {
+                    const globalIndex = currentWordIndex + index;
+                    const status = wordStatuses[globalIndex];
+                    if (status === 'correct' || status === 'wrong') {
+                      return null;
+                    }
+                    return (
+                      <span
+                        key={globalIndex}
+                        className={`word ${index === 0 ? 'active' : ''} ${status}`}
+                      >
+                        {word}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
-            {/* Input Box */}
-            <div className="input-container">
-              <input
-                ref={inputRef}
-                type="text"
-                inputMode="text"
-                className={`input-box ${inputStatus}`}
-                data-lang={language}
-                value={inputValue}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-                onPaste={handlePaste}
-                placeholder={language === 'tamil' ? 'இங்கே தட்டச்சு செய்யவும்...' : 'Type here...'}
-                disabled={showResults}
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck="false"
-                data-gramm="false"
-                data-gramm_editor="false"
-                data-enable-grammarly="false"
-              />
-            </div>
-            {/* Inline Results Display */}
-            {showResults && (
-              <div className="inline-results slide-up">
-                <div className="results-header">
-                  <h2 className="results-title">Test Complete!</h2>
-                  <div className="results-summary">
-                    <div className="result-metric">
-                      <span className="metric-label">WPM</span>
-                      <span className="metric-value highlight">{results.wpm}</span>
-                    </div>
-                    <div className="result-metric">
-                      <span className="metric-label">Accuracy</span>
-                      <span className="metric-value">{results.accuracy}%</span>
-                    </div>
-                    <div className="result-metric">
-                      <span className="metric-label">Keystrokes</span>
-                      <span className="metric-value">
-                        {results.totalKeystrokes}
-                        <span className="metric-sub">
-                          (<span className="correct">{results.correctKeystrokes}</span> | <span className="wrong">{results.wrongKeystrokes}</span>)
+              {/* Input Box */}
+              <div className="input-container">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  inputMode="text"
+                  className={`input-box ${inputStatus}`}
+                  data-lang={language}
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                  onPaste={handlePaste}
+                  placeholder={language === 'tamil' ? 'இங்கே தட்டச்சு செய்யவும்...' : 'Type here...'}
+                  disabled={showResults}
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck="false"
+                  data-gramm="false"
+                  data-gramm_editor="false"
+                  data-enable-grammarly="false"
+                />
+              </div>
+              {/* Inline Results Display */}
+              {showResults && (
+                <div className="inline-results slide-up">
+                  <div className="results-header">
+                    <h2 className="results-title">Test Complete!</h2>
+                    <div className="results-summary">
+                      <div className="result-metric">
+                        <span className="metric-label">WPM</span>
+                        <span className="metric-value highlight">{results.wpm}</span>
+                      </div>
+                      <div className="result-metric">
+                        <span className="metric-label">Accuracy</span>
+                        <span className="metric-value">{results.accuracy}%</span>
+                      </div>
+                      <div className="result-metric">
+                        <span className="metric-label">Keystrokes</span>
+                        <span className="metric-value">
+                          {results.totalKeystrokes}
+                          <span className="metric-sub">
+                            (<span className="correct">{results.correctKeystrokes}</span> | <span className="wrong">{results.wrongKeystrokes}</span>)
+                          </span>
                         </span>
-                      </span>
+                      </div>
+                      <div className="result-metric">
+                        <span className="metric-label">Words</span>
+                        <span className="metric-value">
+                          <span className="correct">{results.correctWords}</span> / <span className="wrong">{results.wrongWords}</span>
+                        </span>
+                      </div>
                     </div>
-                    <div className="result-metric">
-                      <span className="metric-label">Words</span>
-                      <span className="metric-value">
-                        <span className="correct">{results.correctWords}</span> / <span className="wrong">{results.wrongWords}</span>
-                      </span>
-                    </div>
+                    <button className="btn btn-primary retry-btn" onClick={handleTryAgain}>
+                      🔄 Try Again
+                    </button>
                   </div>
-                  <button className="btn btn-primary retry-btn" onClick={handleTryAgain}>
-                    🔄 Try Again
-                  </button>
                 </div>
-              </div>
-            )}
-          </div>
-
-          {/* Right Side - Timer & Stats */}
-          <div className="timer-stats-section">
-            {/* Timer Display */}
-            <div className="timer-display">
-              <div className="timer-label">Timer</div>
-              {!hasStarted ? (
-                <div className="timer-inputs">
-                  <input
-                    type="number"
-                    className="timer-input"
-                    value={minutes}
-                    onChange={(e) => setMinutes(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
-                    min="0"
-                    max="59"
-                    disabled={hasStarted}
-                  />
-                  <span className="timer-separator">:</span>
-                  <input
-                    type="number"
-                    className="timer-input"
-                    value={seconds}
-                    onChange={(e) => setSeconds(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
-                    min="0"
-                    max="59"
-                    disabled={hasStarted}
-                  />
-                </div>
-              ) : (
-                <div className="timer-time-display">{formatTime(timeLeft)}</div>
               )}
             </div>
 
-            {/* Control Buttons */}
-            <div className="timer-buttons">
-              {!hasStarted ? (
-                <button className="btn btn-primary" onClick={handleStart}>
-                  ▶ Start
-                </button>
-              ) : (
-                <>
-                  <button className="btn btn-secondary" onClick={handleStop}>
-                    ⏹ Stop
-                  </button>
-                  <button className="btn btn-secondary" onClick={handleReset}>
-                    🔄 Reset
-                  </button>
-                </>
-              )}
-            </div>
-
-            {/* Stats Display - Simple during typing */}
-            <div className="stats-grid">
-              <div className="stat-item">
-                <div className="stat-label">Correct</div>
-                <div className="stat-value success">{correctWords}</div>
+            {/* Right Side - Timer & Stats */}
+            <div className="timer-stats-section">
+              {/* Timer Display */}
+              <div className="timer-display">
+                <div className="timer-label">Timer</div>
+                {!hasStarted ? (
+                  <div className="timer-inputs">
+                    <input
+                      type="number"
+                      className="timer-input"
+                      value={minutes}
+                      onChange={(e) => setMinutes(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
+                      min="0"
+                      max="59"
+                      disabled={hasStarted}
+                    />
+                    <span className="timer-separator">:</span>
+                    <input
+                      type="number"
+                      className="timer-input"
+                      value={seconds}
+                      onChange={(e) => setSeconds(Math.max(0, Math.min(59, parseInt(e.target.value) || 0)))}
+                      min="0"
+                      max="59"
+                      disabled={hasStarted}
+                    />
+                  </div>
+                ) : (
+                  <div className="timer-time-display">{formatTime(timeLeft)}</div>
+                )}
               </div>
-              <div className="stat-item">
-                <div className="stat-label">Wrong</div>
-                <div className="stat-value error">{wrongWords}</div>
+
+              {/* Control Buttons */}
+              <div className="timer-buttons">
+                {!hasStarted ? (
+                  <button className="btn btn-primary" onClick={handleStart}>
+                    ▶ Start
+                  </button>
+                ) : (
+                  <>
+                    <button className="btn btn-secondary" onClick={handleStop}>
+                      ⏹ Stop
+                    </button>
+                    <button className="btn btn-secondary" onClick={handleReset}>
+                      🔄 Reset
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Stats Display - Simple during typing */}
+              <div className="stats-grid">
+                <div className="stat-item">
+                  <div className="stat-label">Correct</div>
+                  <div className="stat-value success">{correctWords}</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-label">Wrong</div>
+                  <div className="stat-value error">{wrongWords}</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-
+        </main>
+      )}
 
     </div>
   );
