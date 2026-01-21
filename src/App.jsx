@@ -5,6 +5,16 @@ import { tamilWords } from './data/tamilWords';
 import { compareWords, formatTime, calculateMetrics } from './utils/normalize';
 import { convertToTamil } from './utils/maruthamLayout';
 import LearningPage from './components/LearningPage';
+import {
+  Keyboard,
+  GraduationCap,
+  Moon,
+  Sun,
+  Play,
+  Square,
+  RotateCcw,
+  Languages
+} from 'lucide-react';
 
 function App() {
   // Page Navigation
@@ -338,13 +348,15 @@ function App() {
             className={`nav-btn ${currentPage === 'practice' ? 'active' : ''}`}
             onClick={() => setCurrentPage('practice')}
           >
-            {language === 'tamil' ? 'பயிற்சி' : 'Practice'}
+            <Keyboard size={18} />
+            <span>{language === 'tamil' ? 'பயிற்சி' : 'Practice'}</span>
           </button>
           <button
             className={`nav-btn ${currentPage === 'learning' ? 'active' : ''}`}
             onClick={() => setCurrentPage('learning')}
           >
-            {language === 'tamil' ? 'கற்றல்' : 'Learning'}
+            <GraduationCap size={18} />
+            <span>{language === 'tamil' ? 'கற்றல்' : 'Learning'}</span>
           </button>
         </div>
         <div className="header-controls">
@@ -364,8 +376,8 @@ function App() {
               தமிழ்
             </button>
           </div>
-          <button className="theme-toggle" onClick={handleThemeToggle}>
-            {theme === 'light' ? '🌙' : '☀️'}
+          <button className="theme-toggle" onClick={handleThemeToggle} aria-label="Toggle theme">
+            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>
       </header>
@@ -457,7 +469,8 @@ function App() {
                       </div>
                     </div>
                     <button className="btn btn-primary retry-btn" onClick={handleTryAgain}>
-                      🔄 Try Again
+                      <RotateCcw size={18} />
+                      <span>Try Again</span>
                     </button>
                   </div>
                 </div>
@@ -500,15 +513,18 @@ function App() {
               <div className="timer-buttons">
                 {!hasStarted ? (
                   <button className="btn btn-primary" onClick={handleStart}>
-                    ▶ Start
+                    <Play size={18} />
+                    <span>Start</span>
                   </button>
                 ) : (
                   <>
-                    <button className="btn btn-secondary" onClick={handleStop}>
-                      ⏹ Stop
+                    <button className="btn btn-danger" onClick={handleStop}>
+                      <Square size={18} />
+                      <span>Stop</span>
                     </button>
                     <button className="btn btn-secondary" onClick={handleReset}>
-                      🔄 Reset
+                      <RotateCcw size={18} />
+                      <span>Reset</span>
                     </button>
                   </>
                 )}

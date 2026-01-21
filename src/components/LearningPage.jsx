@@ -3,6 +3,16 @@ import { englishExercises } from '../data/englishExercises';
 import { tamilExercises } from '../data/tamilExercises';
 import { convertToTamil } from '../utils/maruthamLayout';
 import { compareWords } from '../utils/normalize';
+import {
+    ArrowLeft,
+    Keyboard,
+    Check,
+    Lock,
+    Circle,
+    RotateCcw,
+    ArrowRight,
+    Play
+} from 'lucide-react';
 import VisualKeyboard from './VisualKeyboard';
 
 function LearningPage({ language, theme, onBackToPractice }) {
@@ -228,7 +238,8 @@ function LearningPage({ language, theme, onBackToPractice }) {
             {/* Header with Back Button */}
             <div className="learning-header">
                 <button className="btn btn-secondary" onClick={onBackToPractice}>
-                    ← Back to Practice
+                    <ArrowLeft size={18} />
+                    <span>Back to Practice</span>
                 </button>
                 <h1 className="learning-title">
                     {language === 'tamil' ? 'கற்றல்' : 'Learning Mode'}
@@ -237,7 +248,8 @@ function LearningPage({ language, theme, onBackToPractice }) {
                     className="btn btn-secondary"
                     onClick={() => setShowKeyboard(!showKeyboard)}
                 >
-                    {showKeyboard ? '⌨️ Hide Keyboard' : '⌨️ Show Keyboard'}
+                    <Keyboard size={18} />
+                    <span>{showKeyboard ? 'Hide Keyboard' : 'Show Keyboard'}</span>
                 </button>
             </div>
 
@@ -260,9 +272,9 @@ function LearningPage({ language, theme, onBackToPractice }) {
                                     <span className="exercise-number">{exercise.id}</span>
                                     <span className="exercise-name">{exercise.title}</span>
                                     <span className="exercise-status-icon">
-                                        {status === 'completed' && '✓'}
-                                        {status === 'current' && '→'}
-                                        {status === 'locked' && '🔒'}
+                                        {status === 'completed' && <Check size={16} className="text-success" />}
+                                        {status === 'current' && <Play size={16} className="text-primary" />}
+                                        {status === 'locked' && <Lock size={16} className="text-muted" />}
                                     </span>
                                 </button>
                             );
@@ -337,14 +349,15 @@ function LearningPage({ language, theme, onBackToPractice }) {
                             {/* Control Buttons */}
                             <div className="exercise-controls">
                                 <button className="btn btn-secondary" onClick={handleRestartExercise}>
-                                    🔄 Restart Exercise
+                                    <RotateCcw size={18} />
+                                    <span>Restart Exercise</span>
                                 </button>
                             </div>
                         </>
                     ) : (
                         /* Exercise Complete Screen */
                         <div className="exercise-complete">
-                            <h2 className="complete-title">🎉 Exercise Complete!</h2>
+                            <h2 className="complete-title">Exercise Complete!</h2>
                             <div className="complete-stats">
                                 <div className="complete-stat">
                                     <span className="stat-label">Accuracy</span>
@@ -357,7 +370,7 @@ function LearningPage({ language, theme, onBackToPractice }) {
                                 <div className="complete-stat">
                                     <span className="stat-label">Status</span>
                                     <span className={`stat-value ${parseFloat(currentAccuracy) >= currentExercise?.requiredAccuracy ? 'success' : 'error'}`}>
-                                        {parseFloat(currentAccuracy) >= currentExercise?.requiredAccuracy ? 'Passed ✓' : 'Try Again'}
+                                        {parseFloat(currentAccuracy) >= currentExercise?.requiredAccuracy ? 'Passed' : 'Try Again'}
                                     </span>
                                 </div>
                             </div>
@@ -372,12 +385,14 @@ function LearningPage({ language, theme, onBackToPractice }) {
                             </p>
                             <div className="complete-buttons">
                                 <button className="btn btn-secondary" onClick={handleRestartExercise}>
-                                    🔄 Retry Exercise
+                                    <RotateCcw size={18} />
+                                    <span>Retry Exercise</span>
                                 </button>
                                 {parseFloat(currentAccuracy) >= currentExercise?.requiredAccuracy &&
                                     currentExerciseId < exercises.length && (
                                         <button className="btn btn-primary" onClick={handleNextExercise}>
-                                            Next Exercise →
+                                            <span>Next Exercise</span>
+                                            <ArrowRight size={18} />
                                         </button>
                                     )}
                             </div>

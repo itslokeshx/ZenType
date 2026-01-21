@@ -131,7 +131,29 @@
 
 .theme-toggle:hover {
   background-color: var(--border);
-  transform: scale(1.05);
+  transform: rotate(15deg);
+}
+
+/* Button Icon Alignment */
+.btn,
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Icon Colors */
+.text-success {
+  color: var(--success);
+}
+
+.text-primary {
+  color: var(--accent-blue);
+}
+
+.text-muted {
+  color: var(--text-secondary);
 }
 
 /* ===========================
