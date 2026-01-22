@@ -21,7 +21,7 @@ export const maruthamLayout = {
     '\\': { normal: '\\', shifted: 'க்ஷ' },
 
     // Row 2 (QWERTY row)
-    'q': { normal: 'ணு', shifted: '' },
+    'q': { normal: 'ணு', shifted: 'ன' },
     'w': { normal: 'ற', shifted: 'று' },
     'e': { normal: 'ந', shifted: 'நு' },
     'r': { normal: 'ச', shifted: 'சு' },
@@ -31,7 +31,7 @@ export const maruthamLayout = {
     'i': { normal: 'ை', shifted: 'ஐ' },
     'o': { normal: 'டி', shifted: 'டீ' },
     'p': { normal: 'ி', shifted: 'ீ' },
-    '[': { normal: 'ல்', shifted: 'ூ' },
+    '[': { normal: ' ு', shifted: ' ூ' },
     ']': { normal: ',', shifted: 'ீ' },
 
     // Row 3 (ASDF row)
@@ -45,7 +45,8 @@ export const maruthamLayout = {
     'k': { normal: 'ம', shifted: 'மு' },
     'l': { normal: 'ட', shifted: 'டு' },
     ';': { normal: '்', shifted: '' },
-    "'": { normal: 'ங', shifted: 'ஞ' },
+    "\'": { normal: 'ங', shifted: 'ஞ' },
+    '"': { normal: 'ஞ', shifted: 'ஞ' },  // Shift+' produces " on keyboard
 
     // Row 4 (ZXCV row)
     'z': { normal: 'ண', shifted: 'ூ' },
