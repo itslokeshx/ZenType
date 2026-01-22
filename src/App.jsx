@@ -376,24 +376,19 @@ function App() {
             <button
               className={`language-btn ${language === 'english' ? 'active' : ''}`}
               onClick={() => handleLanguageSwitch('english')}
-              disabled={(hasStarted && currentPage === 'practice') || currentPage === 'learning'}
+              disabled={hasStarted && currentPage === 'practice'}
             >
               EN
             </button>
             <button
               className={`language-btn ${language === 'tamil' ? 'active' : ''}`}
               onClick={() => handleLanguageSwitch('tamil')}
-              disabled={(hasStarted && currentPage === 'practice') || currentPage === 'learning'}
+              disabled={hasStarted && currentPage === 'practice'}
             >
               தமிழ்
             </button>
           </div>
-          <button
-            className="theme-toggle"
-            onClick={handleThemeToggle}
-            aria-label="Toggle theme"
-            disabled={(isRunning && currentPage === 'practice') || currentPage === 'learning'}
-          >
+          <button className="theme-toggle" onClick={handleThemeToggle} aria-label="Toggle theme">
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>

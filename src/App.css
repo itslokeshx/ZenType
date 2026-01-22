@@ -101,9 +101,8 @@
 }
 
 .language-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: not-allowed;
-  filter: grayscale(100%);
 }
 
 .language-btn.active {
@@ -130,15 +129,9 @@
   transition: all 150ms ease;
 }
 
-.theme-toggle:hover:not(:disabled) {
+.theme-toggle:hover {
   background-color: var(--border);
   transform: rotate(15deg);
-}
-
-.theme-toggle:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  filter: grayscale(100%);
 }
 
 /* Button Icon Alignment */
