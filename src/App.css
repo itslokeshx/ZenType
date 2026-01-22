@@ -101,8 +101,9 @@
 }
 
 .language-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  filter: grayscale(100%);
 }
 
 .language-btn.active {
@@ -129,9 +130,15 @@
   transition: all 150ms ease;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover:not(:disabled) {
   background-color: var(--border);
   transform: rotate(15deg);
+}
+
+.theme-toggle:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(100%);
 }
 
 /* Button Icon Alignment */
@@ -1133,6 +1140,8 @@
   gap: 6px;
   align-items: center;
   box-shadow: 0 4px 24px var(--shadow);
+  min-height: 350px;
+  will-change: auto;
 }
 
 .visual-keyboard.premium {
@@ -1156,7 +1165,6 @@
   border: 2px solid transparent;
   border-radius: 10px;
   font-weight: 600;
-  transition: background-color 100ms ease, border-color 100ms ease;
   position: relative;
   cursor: default;
 }
