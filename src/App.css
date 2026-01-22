@@ -845,8 +845,13 @@
   color: white;
 }
 
-.nav-btn:hover:not(.active) {
+.nav-btn:hover:not(.active):not(:disabled) {
   background-color: var(--border);
+}
+
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* ===========================
