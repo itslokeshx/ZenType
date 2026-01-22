@@ -415,10 +415,26 @@ function App() {
                     if (status === 'correct' || status === 'wrong') {
                       return null;
                     }
+
+                    // Render active word character by character
+                    if (index === 0) {
+                      return (
+                        <span key={globalIndex} className={`word active`}>
+                          {word.split('').map((char, charIndex) => {
+                            let charClass = 'char-pending';
+                            if (charIndex < inputValue.length) {
+                              charClass = char === inputValue[charIndex] ? 'char-correct' : 'char-wrong';
+                            }
+                            return <span key={charIndex} className={charClass}>{char}</span>;
+                          })}
+                        </span>
+                      );
+                    }
+
                     return (
                       <span
                         key={globalIndex}
-                        className={`word ${index === 0 ? 'active' : ''} ${status}`}
+                        className={`word ${status}`}
                       >
                         {word}
                       </span>

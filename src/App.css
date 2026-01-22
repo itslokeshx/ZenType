@@ -591,9 +591,23 @@
   }
 }
 
+/* Character Level Feedback */
+.char-correct {
+  color: var(--success);
+}
+
+.char-wrong {
+  color: var(--error);
+  text-decoration: underline;
+  text-decoration-color: var(--error);
+}
+
+.char-pending {
+  color: inherit;
+}
+
 /* ===========================
-   Responsive Design
-   =========================== */
+   Responsive Design ... */
 
 /* Tablet: 768px - 1023px */
 @media (max-width: 1023px) {
