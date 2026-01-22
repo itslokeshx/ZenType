@@ -31,7 +31,8 @@ export const maruthamLayout = {
     'i': { normal: 'ை', shifted: 'ஐ' },
     'o': { normal: 'டி', shifted: 'டீ' },
     'p': { normal: 'ி', shifted: 'ீ' },
-    '[': { normal: ' ு', shifted: ' ூ' },
+    '[': { normal: 'ு', shifted: 'ூ' },
+    '{': { normal: 'ூ', shifted: 'ூ' },  // Shift+[ produces { on keyboard
     ']': { normal: ',', shifted: 'ீ' },
 
     // Row 3 (ASDF row)
