@@ -1121,91 +1121,127 @@
 }
 
 /* ===========================
-   Visual Keyboard
+   Visual Keyboard - Premium Design
    =========================== */
 .visual-keyboard {
-  background-color: var(--bg-secondary);
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
+  box-shadow: 0 4px 24px var(--shadow);
+}
+
+.visual-keyboard.premium {
+  background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
 }
 
 .keyboard-row {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   justify-content: center;
 }
 
 .keyboard-key {
-  min-width: 45px;
-  height: 45px;
+  min-width: 54px;
+  height: 56px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 14px;
+  gap: 2px;
+  border: 2px solid transparent;
+  border-radius: 10px;
   font-weight: 600;
-  transition: all 150ms ease;
+  transition: background-color 100ms ease, border-color 100ms ease;
   position: relative;
+  cursor: default;
+}
+
+.keyboard-key.has-shift {
+  justify-content: flex-end;
+  padding-bottom: 8px;
+  padding-top: 4px;
 }
 
 .keyboard-key.wide {
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .keyboard-key.home-key::after {
   content: '';
   position: absolute;
-  bottom: 8px;
-  width: 6px;
-  height: 6px;
-  background-color: var(--text-primary);
-  border-radius: 50%;
-  opacity: 0.3;
+  bottom: 4px;
+  width: 16px;
+  height: 3px;
+  background-color: currentColor;
+  border-radius: 2px;
+  opacity: 0.35;
 }
 
-.keyboard-key.highlighted {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+.keyboard-key.expected {
   z-index: 10;
 }
 
+.keyboard-key.correct {
+  z-index: 10;
+}
+
+.keyboard-key.wrong {
+  z-index: 10;
+}
+
+.key-shifted {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
 .key-label {
-  color: #111111;
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.5px;
 }
 
 /* Finger Guide */
 .finger-guide {
   display: flex;
-  gap: 12px;
-  margin-top: 12px;
+  gap: 16px;
+  margin-top: 16px;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
 .finger-guide-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 11px;
   color: var(--text-secondary);
 }
 
 .finger-color {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  border: 1px solid var(--border);
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .finger-label {
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 /* ===========================
@@ -1386,16 +1422,31 @@
 
   .visual-keyboard {
     padding: 12px;
+    gap: 4px;
   }
 
   .keyboard-key {
-    min-width: 32px;
-    height: 32px;
-    font-size: 11px;
+    min-width: 34px;
+    height: 38px;
+  }
+
+  .keyboard-key.has-shift {
+    padding-bottom: 4px;
+    padding-top: 2px;
   }
 
   .keyboard-key.wide {
-    min-width: 120px;
+    min-width: 140px;
+  }
+
+  .key-shifted {
+    font-size: 8px;
+    top: 3px;
+    right: 4px;
+  }
+
+  .key-label {
+    font-size: 11px;
   }
 
   .finger-guide {
@@ -1520,22 +1571,25 @@
 
   .visual-keyboard {
     padding: 8px;
-    gap: 3px;
+    gap: 2px;
   }
 
   .keyboard-row {
-    gap: 3px;
+    gap: 2px;
   }
 
   .keyboard-key {
     min-width: 26px;
-    height: 28px;
-    font-size: 10px;
+    height: 30px;
     border-radius: 4px;
   }
 
   .keyboard-key.wide {
-    min-width: 60px;
+    min-width: 80px;
+  }
+
+  .key-shifted {
+    display: none;
   }
 
   .key-label {

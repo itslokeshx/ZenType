@@ -44,6 +44,8 @@ function LearningPage({ language, theme, onBackToPractice }) {
 
     const processingRef = useRef(false);
     const inputRef = useRef(null);
+    const [pressedKey, setPressedKey] = useState(null);
+    const [lastExpectedChar, setLastExpectedChar] = useState(null);
 
     const currentExercise = exercises.find(ex => ex.id === currentExerciseId);
     const currentLine = currentExercise?.targetLines[currentLineIndex] || '';
@@ -130,9 +132,14 @@ function LearningPage({ language, theme, onBackToPractice }) {
     };
 
     const handleKeyDown = (e) => {
+        // Track pressed key for visual feedback
+        let displayKey = e.key;
+
         // Tamil mode keyboard interception
         if (language === 'tamil') {
             if (e.key === 'Backspace') {
+                setPressedKey('Backspace');
+                setTimeout(() => setPressedKey(null), 150);
                 e.preventDefault();
                 setInputValue(inputValue.slice(0, -1));
                 return;
@@ -149,11 +156,33 @@ function LearningPage({ language, theme, onBackToPractice }) {
             if (e.key.length === 1) {
                 e.preventDefault();
                 const tamilChar = convertToTamil(e.key, e.shiftKey);
+                displayKey = tamilChar;
+                // Save what character was expected when key was pressed
+                const expectedChar = currentLine[inputValue.length];
+                setLastExpectedChar(expectedChar);
+                setPressedKey(e.key.toLowerCase());
+                setTimeout(() => {
+                    setPressedKey(null);
+                    setLastExpectedChar(null);
+                }, 150);
+
                 const newValue = inputValue + tamilChar;
 
                 if (newValue.length <= currentLine.length) {
                     setInputValue(newValue);
                 }
+            }
+        } else {
+            // English mode - track key for visual feedback
+            if (e.key.length === 1 || e.key === ' ') {
+                // Save what character was expected when key was pressed
+                const expectedChar = currentLine[inputValue.length];
+                setLastExpectedChar(expectedChar);
+                setPressedKey(e.key === ' ' ? 'Space' : e.key.toLowerCase());
+                setTimeout(() => {
+                    setPressedKey(null);
+                    setLastExpectedChar(null);
+                }, 150);
             }
         }
     };
@@ -349,7 +378,8 @@ function LearningPage({ language, theme, onBackToPractice }) {
                             {showKeyboard && (
                                 <VisualKeyboard
                                     language={language}
-                                    nextChar={currentLine[inputValue.length]}
+                                    nextChar={lastExpectedChar || currentLine[inputValue.length]}
+                                    pressedKey={pressedKey}
                                     theme={theme}
                                 />
                             )}
