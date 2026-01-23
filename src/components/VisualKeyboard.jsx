@@ -239,7 +239,8 @@ function VisualKeyboard({ language, nextChar, pressedKey, theme }) {
             return '0 4px 20px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)';
         }
         return isDark
-            ? 'inset 0 -2px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
+            // Dark mode with light keys: needs strong white highlight for localized depth, just like light mode
+            ? 'inset 0 -2px 0 rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.8)'
             : 'inset 0 -2px 0 rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)';
     };
 
