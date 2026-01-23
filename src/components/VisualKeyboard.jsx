@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 
-// Finger color mapping - More vibrant, premium colors with better contrast
+// Finger color mapping - using vibrant pastel colors for BOTH themes as requested
 const FINGER_COLORS = {
-    'left-pinky': { bg: '#fecaca', dark: '#991b1b' },      // Red tones
-    'left-ring': { bg: '#fed7aa', dark: '#9a3412' },       // Orange tones
-    'left-middle': { bg: '#fef08a', dark: '#854d0e' },     // Yellow tones
-    'left-index': { bg: '#bbf7d0', dark: '#166534' },      // Green tones
-    'right-index': { bg: '#bfdbfe', dark: '#1e40af' },     // Blue tones
-    'right-middle': { bg: '#e9d5ff', dark: '#6b21a8' },    // Purple tones
-    'right-ring': { bg: '#fbcfe8', dark: '#9d174d' },      // Pink tones
-    'right-pinky': { bg: '#cbd5e1', dark: '#334155' },     // Slate tones
-    'thumb': { bg: '#d6d3d1', dark: '#44403c' }            // Stone tones
+    'left-pinky': { bg: '#fecaca', dark: '#fecaca' },      // Red tones
+    'left-ring': { bg: '#fed7aa', dark: '#fed7aa' },       // Orange tones
+    'left-middle': { bg: '#fef08a', dark: '#fef08a' },     // Yellow tones
+    'left-index': { bg: '#bbf7d0', dark: '#bbf7d0' },      // Green tones
+    'right-index': { bg: '#bfdbfe', dark: '#bfdbfe' },     // Blue tones
+    'right-middle': { bg: '#e9d5ff', dark: '#e9d5ff' },    // Purple tones
+    'right-ring': { bg: '#fbcfe8', dark: '#fbcfe8' },      // Pink tones
+    'right-pinky': { bg: '#cbd5e1', dark: '#cbd5e1' },     // Slate tones
+    'thumb': { bg: '#d6d3d1', dark: '#d6d3d1' }            // Stone tones
 };
 
 // English QWERTY layout with finger assignments and shifted characters
@@ -267,14 +267,14 @@ function VisualKeyboard({ language, nextChar, pressedKey, theme }) {
                                 {hasShifted && (
                                     <span
                                         className="key-shifted"
-                                        style={{ color: keyState ? '#ffffff' : (isDark ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.6)') }}
+                                        style={{ color: keyState ? '#ffffff' : 'rgba(0,0,0,0.6)' }}
                                     >
                                         {keyObj.shifted}
                                     </span>
                                 )}
                                 <span
                                     className="key-label"
-                                    style={{ color: keyState ? '#ffffff' : (isDark ? '#ffffff' : '#000000') }}
+                                    style={{ color: keyState ? '#ffffff' : '#000000' }}
                                 >
                                     {keyObj.key}
                                 </span>
