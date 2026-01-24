@@ -93,7 +93,7 @@ const TAMIL_LAYOUT = [
         { key: '=', shifted: 'ஹ', finger: 'right-pinky', engKey: '=' },
     ],
     [
-        { key: 'ணு', shifted: 'ன', finger: 'left-pinky', engKey: 'q' },
+        { key: 'ணு', shifted: 'ண', finger: 'left-pinky', engKey: 'q' },
         { key: 'ற', shifted: 'று', finger: 'left-ring', engKey: 'w' },
         { key: 'ந', shifted: 'நு', finger: 'left-middle', engKey: 'e' },
         { key: 'ச', shifted: 'சு', finger: 'left-index', engKey: 'r' },

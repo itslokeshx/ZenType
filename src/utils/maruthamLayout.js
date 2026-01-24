@@ -35,7 +35,7 @@ export const maruthamLayout = {
     '|': { normal: 'க்ஷ', shifted: 'க்ஷ' },  // Shift+\ produces |
 
     // Row 2 (QWERTY row)
-    'q': { normal: 'ணு', shifted: 'ன' },
+    'q': { normal: 'ணு', shifted: 'ண' },
     'w': { normal: 'ற', shifted: 'று' },
     'e': { normal: 'ந', shifted: 'நு' },
     'r': { normal: 'ச', shifted: 'சு' },
