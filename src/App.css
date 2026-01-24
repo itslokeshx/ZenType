@@ -986,11 +986,11 @@
    Exercise Area (Right Panel)
    =========================== */
 .exercise-area {
-  padding: 20px 28px;
+  padding: 18px 28px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   flex: 1;
   background-color: var(--bg-primary);
   /* Subtle pattern for texture */
@@ -1011,7 +1011,7 @@
   font-size: 24px;
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   letter-spacing: -0.4px;
 }
 
@@ -1028,7 +1028,7 @@
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 14px 20px;
+  padding: 12px 18px;
   box-shadow: 0 2px 6px var(--shadow);
   max-width: 750px;
   width: 100%;
@@ -1037,7 +1037,7 @@
 .progress-stats {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: 12px;
   color: var(--text-primary);
   font-weight: 600;
@@ -1065,8 +1065,8 @@
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 24px 32px;
-  min-height: 80px;
+  padding: 20px 32px;
+  min-height: 75px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1171,7 +1171,7 @@
   background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 12px 18px 10px;
   display: flex;
   flex-direction: column;
   gap: 4px;
