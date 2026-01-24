@@ -44,6 +44,7 @@ function LearningPage({ language, theme, onBackToPractice }) {
 
     const processingRef = useRef(false);
     const inputRef = useRef(null);
+    const targetTextRef = useRef(null);
     const [pressedKey, setPressedKey] = useState(null);
     const [lastExpectedChar, setLastExpectedChar] = useState(null);
 
@@ -60,6 +61,16 @@ function LearningPage({ language, theme, onBackToPractice }) {
         processingRef.current = false;
         inputRef.current?.focus();
     }, [currentExerciseId, currentLineIndex]);
+
+    // Auto-scroll to keep current line visible
+    useEffect(() => {
+        if (targetTextRef.current) {
+            const currentLineElement = targetTextRef.current.querySelector('.current-line');
+            if (currentLineElement) {
+                currentLineElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }, [currentLineIndex]);
 
     // Calculate character statuses
     useEffect(() => {
@@ -342,7 +353,7 @@ function LearningPage({ language, theme, onBackToPractice }) {
                             </div>
 
                             {/* Target Text Display */}
-                            <div className="target-text-container" data-lang={language}>
+                            <div className="target-text-container" data-lang={language} key={currentLineIndex} ref={targetTextRef}>
                                 <div className="target-text" data-lang={language}>
                                     {/* Current Line */}
                                     <div className="text-line current-line">

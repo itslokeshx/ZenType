@@ -1065,7 +1065,7 @@
   border-radius: 14px;
   padding: 40px 32px;
   min-height: 140px;
-  max-height: 28w0px;
+  max-height: 350px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1073,12 +1073,12 @@
   max-width: 750px;
   width: 100%;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .target-text-container[data-lang="tamil"] {
   min-height: 160px;
-  max-height: 320px;
+  max-height: 400px;
   padding: 44px 32px;
 }
 
