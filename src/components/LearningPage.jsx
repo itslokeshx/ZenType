@@ -344,14 +344,30 @@ function LearningPage({ language, theme, onBackToPractice }) {
                             {/* Target Text Display */}
                             <div className="target-text-container" data-lang={language}>
                                 <div className="target-text" data-lang={language}>
-                                    {currentLine.split('').map((char, index) => (
-                                        <span
-                                            key={index}
-                                            className={`char ${charStatuses[index] || 'pending'}`}
-                                        >
-                                            {char}
-                                        </span>
-                                    ))}
+                                    {/* Current Line */}
+                                    <div className="text-line current-line">
+                                        {currentLine.split('').map((char, index) => (
+                                            <span
+                                                key={index}
+                                                className={`char ${charStatuses[index] || 'pending'}`}
+                                            >
+                                                {char}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    {/* Next Line (if exists) */}
+                                    {currentLineIndex < currentExercise.targetLines.length - 1 && (
+                                        <div className="text-line next-line">
+                                            {currentExercise.targetLines[currentLineIndex + 1].split('').map((char, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="char pending"
+                                                >
+                                                    {char}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 

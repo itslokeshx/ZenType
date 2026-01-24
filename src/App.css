@@ -1058,17 +1058,16 @@
   box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
 }
 
-/* ===========================
-   Target Text Display
-   =========================== */
+
 .target-text-container {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 20px 32px;
-  min-height: 75px;
+  padding: 36px 32px;
+  min-height: 120px;
+  max-height: 240px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   box-shadow: 0 4px 12px var(--shadow);
   max-width: 750px;
@@ -1080,7 +1079,7 @@
 .target-text {
   font-family: 'Inter', 'SF Pro Display', -apple-system, system-ui, sans-serif;
   font-size: 28px;
-  line-height: 1.5;
+  line-height: 1.8;
   letter-spacing: 0.4px;
   display: flex;
   flex-wrap: wrap;
@@ -1088,6 +1087,7 @@
   gap: 3px;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .target-text[data-lang="tamil"] {
@@ -1126,6 +1126,23 @@
   color: var(--error);
   background-color: rgba(239, 68, 68, 0.1);
   text-decoration: underline wavy var(--error);
+}
+
+/* Text Line Styling for 2-line display */
+.text-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+}
+
+.text-line.current-line {
+  margin-bottom: 8px;
+}
+
+.text-line.next-line {
+  opacity: 0.5;
 }
 
 /* ===========================
