@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { getTamilKeyMapping } from '../utils/maruthamLayout';
 
 // Finger color mapping - using vibrant pastel colors for BOTH themes as requested
 const FINGER_COLORS = {
@@ -145,29 +146,42 @@ function VisualKeyboard({ language, nextChar, pressedKey, theme }) {
         // Normalize the character for comparison
         const char = nextChar.normalize('NFC');
 
-        // Find the key in the layout
-        for (const row of layout) {
-            for (const keyObj of row) {
-                // Check normal key
-                if (keyObj.key === char || keyObj.key.toLowerCase() === char.toLowerCase()) {
-                    return keyObj.key;
+        if (language === 'tamil') {
+            // For Tamil, find which English key produces this Tamil character
+            const mapping = getTamilKeyMapping(char);
+            if (mapping) {
+                // Find the key in TAMIL_LAYOUT that has this engKey
+                for (const row of TAMIL_LAYOUT) {
+                    for (const keyObj of row) {
+                        if (keyObj.engKey === mapping.engKey ||
+                            (keyObj.engKey === ' ' && mapping.engKey === ' ')) {
+                            return keyObj.key;
+                        }
+                    }
                 }
-                // Check shifted key
-                if (keyObj.shifted === char || keyObj.shifted?.toLowerCase() === char.toLowerCase()) {
-                    return keyObj.key;
-                }
-                // Check if key starts with char (for multi-char Tamil keys)
-                if (keyObj.key.startsWith(char) || char.startsWith(keyObj.key)) {
-                    return keyObj.key;
-                }
-                // Space handling
-                if (keyObj.key === 'Space' && char === ' ') {
-                    return keyObj.key;
+            }
+        } else {
+            // For English, match directly
+            for (const row of layout) {
+                for (const keyObj of row) {
+                    // Check normal key
+                    if (keyObj.key === char || keyObj.key.toLowerCase() === char.toLowerCase()) {
+                        return keyObj.key;
+                    }
+                    // Check shifted key
+                    if (keyObj.shifted === char || keyObj.shifted?.toLowerCase() === char.toLowerCase()) {
+                        return keyObj.key;
+                    }
+                    // Space handling
+                    if (keyObj.key === 'Space' && char === ' ') {
+                        return keyObj.key;
+                    }
                 }
             }
         }
+
         return null;
-    }, [nextChar, layout]);
+    }, [nextChar, layout, language]);
 
     // Check if a key is pressed - for Tamil, match against engKey
     const isKeyPressed = (keyObj) => {

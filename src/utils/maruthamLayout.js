@@ -90,3 +90,32 @@ export const convertToTamil = (key, shifted = false) => {
     if (!mapping) return key;
     return shifted ? mapping.shifted : mapping.normal;
 };
+
+/**
+ * Find which English key produces a given Tamil character
+ * @param {string} tamilChar - The Tamil character to find
+ * @returns {object|null} - Object with {engKey: string, shifted: boolean} or null if not found
+ */
+export const getTamilKeyMapping = (tamilChar) => {
+    // Normalize the character
+    const char = tamilChar.normalize('NFC');
+
+    // Search through all mappings
+    for (const [engKey, mapping] of Object.entries(maruthamLayout)) {
+        // Check normal (unshifted) key
+        if (mapping.normal === char) {
+            return { engKey: engKey.toLowerCase(), shifted: false };
+        }
+        // Check shifted key
+        if (mapping.shifted === char) {
+            return { engKey: engKey.toLowerCase(), shifted: true };
+        }
+    }
+
+    // Handle space specially
+    if (char === ' ') {
+        return { engKey: ' ', shifted: false };
+    }
+
+    return null;
+};

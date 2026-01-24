@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { englishExercises } from '../data/englishExercises';
 import { tamilExercises } from '../data/tamilExercises';
-import { convertToTamil } from '../utils/maruthamLayout';
+import { convertToTamil, getTamilKeyMapping } from '../utils/maruthamLayout';
 import { compareWords } from '../utils/normalize';
 import {
     ArrowLeft,
