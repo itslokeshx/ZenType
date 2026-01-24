@@ -1074,6 +1074,8 @@
   width: 100%;
   position: relative;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  scroll-padding: 40px;
 }
 
 .target-text-container[data-lang="tamil"] {

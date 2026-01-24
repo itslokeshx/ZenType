@@ -72,6 +72,21 @@ function LearningPage({ language, theme, onBackToPractice }) {
         }
     }, [currentLineIndex]);
 
+    // Auto-scroll to keep current character position visible while typing
+    useEffect(() => {
+        if (targetTextRef.current && inputValue.length > 0) {
+            const currentCharElement = targetTextRef.current.querySelector('.char.current');
+            if (currentCharElement) {
+                // Scroll the current character into view with some padding
+                currentCharElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'nearest'
+                });
+            }
+        }
+    }, [inputValue]);
+
     // Calculate character statuses
     useEffect(() => {
         const statuses = [];
